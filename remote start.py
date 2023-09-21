@@ -2,8 +2,8 @@
 import psutil
 import logging
 import datetime
-
-# Configuration de la journalisation
+#configuration
+# Configuration de la journalisation 
 logging.basicConfig(filename='journal.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def collecter_metriques():
