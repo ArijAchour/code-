@@ -52,7 +52,7 @@ def main():
                     print(f"{cle}: {valeur}")
                     print("Métriques collectées avec succès.")
 
-         time.sleep(30)
+        time.sleep(30)
 
 if __name__ == "__main__":
     main()
