@@ -1,7 +1,9 @@
 import argparse
 import psutil
 import logging
+import time
 from datetime import datetime
+
 
 # Configuration de la journalisation
 #configuration
@@ -40,15 +42,17 @@ def main():
     parser = argparse.ArgumentParser(description="Outil de collecte de métriques de serveur")
     parser.add_argument("--cron", action="store_true", help="Mode d'exécution en tâche cron (silencieux)")
     args = parser.parse_args()
+    while True :
+        metriques = collecter_metriques()
+        if metriques:
+            for cle, valeur in metriques.items():
+                if args.cron:
+                    print(f"{cle}: {valeur}")
+                else:
+                    print(f"{cle}: {valeur}")
+                    print("Métriques collectées avec succès.")
 
-    metriques = collecter_metriques()
-    if metriques:
-        for cle, valeur in metriques.items():
-            if args.cron:
-                print(f"{cle}: {valeur}")
-            else:
-                print(f"{cle}: {valeur}")
-                print("Métriques collectées avec succès.")
+         time.sleep(30)
 
 if __name__ == "__main__":
     main()
