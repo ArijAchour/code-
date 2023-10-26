@@ -1,0 +1,10 @@
+[Unit]
+Description=monitoring et survillance de system Linux
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+User=arij
+ExecStart=/usr/bin/python3 /home/arij/code-/monitoring.py
+[Install]
+WantedBy=multi-user.target
