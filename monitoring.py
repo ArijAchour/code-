@@ -1,13 +1,7 @@
 import argparse
 import psutil
-import logging
 import time
 from datetime import datetime
-
-
-# Configuration de la journalisation
-#configuration
-logging.basicConfig(filename='journal.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Fonction pour collecter les métriques
 def collecter_metriques():
