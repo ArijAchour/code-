@@ -15,9 +15,9 @@ def envoyer_alerte_par_email(destinataire, sujet, corps_message):
     message['To'] = destinataire
 
     # Établir une connexion au serveur SMTP de votre fournisseur de messagerie
-    serveur_smtp = smtplib.SMTP('smtp.votrefournisseuremail.com', 587)
+    serveur_smtp = smtplib.SMTP('', 587)
     serveur_smtp.starttls()  # Activer le chiffrement TLS
-    serveur_smtp.login('votre_adresse_email@gmail.com', 'votre_mot_de_passe')
+    serveur_smtp.login('', '')
 
     # Envoyer l'e-mail
     serveur_smtp.send_message(message)
