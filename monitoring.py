@@ -2,7 +2,7 @@ import argparse
 import psutil
 import time
 from datetime import datetime
-
+from send_email import verifier_seuils_et_envoyer_alertes
 # Fonction pour collecter les métriques
 def collecter_metriques():
     try:
@@ -46,7 +46,10 @@ def main():
                     print(f"{cle}: {valeur}")
                     print("Métriques collectées avec succès.")
 
+        cpu_usage = psutil.cpu_percent(interval=1)
+        memory = psutil.virtual_memory()
+        verifier_seuils_et_envoyer_alertes(cpu_usage, round(memory.used / (1024 ** 3), 2))
         time.sleep(30)
-
+    
 if __name__ == "__main__":
     main()

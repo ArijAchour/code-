@@ -11,7 +11,7 @@ def envoyer_alerte_par_email(destinataire, sujet, corps_message):
     message = EmailMessage()
     message.set_content(corps_message)
     message['Subject'] = sujet
-    message['From'] = 'votre_adresse_email@gmail.com'
+    message['From'] = 'arijachour87@gmail.com'
     message['To'] = destinataire
 
     # Établir une connexion au serveur SMTP de votre fournisseur de messagerie
@@ -26,7 +26,7 @@ def envoyer_alerte_par_email(destinataire, sujet, corps_message):
     serveur_smtp.quit()
 
 # Fonction pour vérifier les seuils et envoyer une alerte si nécessaire
-def verifier_seuils_et_envoyer_alertes():
+def verifier_seuils_et_envoyer_alertes(usage_cpu, usage_ram):
     # Code pour récupérer les métriques du serveur (CPU, RAM, etc.)
     # Utilisez des bibliothèques appropriées pour obtenir les métriques actuelles
 
@@ -41,6 +41,3 @@ def verifier_seuils_et_envoyer_alertes():
         sujet = 'Alerte : Utilisation de la RAM élevée'
         corps_message = f'L\'utilisation de la RAM est actuellement à {usage_ram}%. Veuillez vérifier le serveur.'
         envoyer_alerte_par_email('destinataire@example.com', sujet, corps_message)
-
-# Appel de la fonction pour vérifier les seuils et envoyer des alertes si nécessaire
-verifier_seuils_et_envoyer_alertes()
