@@ -1,29 +1,38 @@
 import smtplib
 from email.message import EmailMessage
+from mailjet_rest import Client
+API_KEY    = "435d6f9bfbaa833bbae14134fde22c6a"
+API_SECRET = "6a5b679f12fe9e2b4da5be5a99534c9d"
+mailjet = Client(auth=(API_KEY, API_SECRET))
 
 # Seuils prédéfinis pour les métriques du serveur
-SEUIL_CPU = 90  # Seuil d'utilisation CPU en pourcentage
+SEUIL_CPU = 70  # Seuil d'utilisation CPU en pourcentage
 SEUIL_RAM = 80  # Seuil d'utilisation de la RAM en pourcentage
 
 # Fonction pour envoyer des alertes par e-mail
-def envoyer_alerte_par_email(destinataire, sujet, corps_message):
-    # Créer un objet EmailMessage
-    message = EmailMessage()
-    message.set_content(corps_message)
-    message['Subject'] = sujet
-    message['From'] = 'arijachour87@gmail.com'
-    message['To'] = destinataire
-
-    # Établir une connexion au serveur SMTP de votre fournisseur de messagerie
-    serveur_smtp = smtplib.SMTP('', 587)
-    serveur_smtp.starttls()  # Activer le chiffrement TLS
-    serveur_smtp.login('', '')
-
-    # Envoyer l'e-mail
-    serveur_smtp.send_message(message)
-
-    # Fermer la connexion au serveur SMTP
-    serveur_smtp.quit()
+def envoyer_alerte_par_email(sujet, corps_message):
+    
+    data = {
+            'Messages': [
+                {
+                "FromEmail": "hsmztn93@gmail.com",
+                "Recipients": [
+                    {
+                    "Email": "houssem.zitoun@outlook.com"
+                    },
+                    {
+                    "Email": "achourarij1@outlook.fr"
+                    }
+                ],
+                "Subject": sujet,
+                "Text-part": corps_message
+                }
+            ]
+        }
+    print("# Envoie d'email")
+    result = mailjet.send.create(data=data)
+    if result.status_code == 200:
+        print ("Email d'alerte envoyé avec succées")
 
 # Fonction pour vérifier les seuils et envoyer une alerte si nécessaire
 def verifier_seuils_et_envoyer_alertes(usage_cpu, usage_ram):

@@ -2,7 +2,7 @@ import argparse
 import psutil
 import time
 from datetime import datetime
-from send_email import verifier_seuils_et_envoyer_alertes
+from send_email import verifier_seuils_et_envoyer_alertes, envoyer_alerte_par_email
 # Fonction pour collecter les métriques
 def collecter_metriques():
     try:
@@ -36,6 +36,13 @@ def main():
     parser = argparse.ArgumentParser(description="Outil de collecte de métriques de serveur")
     parser.add_argument("--cron", action="store_true", help="Mode d'exécution en tâche cron (silencieux)")
     args = parser.parse_args()
+
+    cpu_usage = psutil.cpu_percent(interval=1)
+    memory = psutil.virtual_memory()
+    corps_message = f'L\'utilisation CPU est actuellement à {psutil.cpu_percent(interval=1)}%.\nL\'utilisation de memoire est actuellement à {round(psutil.virtual_memory().used / (1024 ** 3), 2)}%'
+
+    envoyer_alerte_par_email("Machine Connecté - Rapport d'état", corps_message)
+    
     while True :
         metriques = collecter_metriques()
         if metriques:
