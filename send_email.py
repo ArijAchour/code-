@@ -43,10 +43,10 @@ def verifier_seuils_et_envoyer_alertes(usage_cpu, usage_ram):
     if usage_cpu > SEUIL_CPU:
         sujet = 'Alerte : Utilisation CPU élevée'
         corps_message = f'L\'utilisation CPU est actuellement à {usage_cpu}%. Veuillez vérifier le serveur.'
-        envoyer_alerte_par_email('arijachour87@gmail.com', sujet, corps_message)
+        envoyer_alerte_par_email('achourarij1@gmail.com', sujet, corps_message)
 
     # Exemple de vérification du seuil RAM
     if usage_ram > SEUIL_RAM:
         sujet = 'Alerte : Utilisation de la RAM élevée'
         corps_message = f'L\'utilisation de la RAM est actuellement à {usage_ram}%. Veuillez vérifier le serveur.'
-        envoyer_alerte_par_email('arijachour87@gmail.com', sujet, corps_message)
+        envoyer_alerte_par_email('achourarij1@gmail.com', sujet, corps_message)
